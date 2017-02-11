@@ -79,6 +79,21 @@ jQuery.fn.unhighlight = function (options) {
     }).end();
 };
 
+
+
+jQuery.fn.unhighlightword = function (word, options) {
+    var settings = { className: 'highlight', element: 'span' };
+    jQuery.extend(settings, options);
+
+
+    return this.find(settings.element + "." + settings.className).filter(function(){ return $(this).text()== word;    }).each(function () {
+        var parent = this.parentNode;
+        parent.replaceChild(this.firstChild, this);
+        parent.normalize();
+    }).end();
+};
+
+
 jQuery.fn.highlight = function (words, options) {
     var settings = { className: 'highlight', element: 'span', caseSensitive: false, wordsOnly: false };
     jQuery.extend(settings, options);
